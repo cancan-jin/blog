@@ -8,4 +8,4 @@
   - github：代码托管
   - robo3t：mongodb可视化工具
 
-> github安装时是选择在vs code中运行，VScode终端中输入：git config --global user.name "git用户名"，git config --global user.email "git邮箱"，提交master；在gibhub.com中新建代码仓库，返回VScode选择推送到命令，远程连接github，然后将代码上传。
+> github安装时选择在vs code中运行，VScode终端中输入：git config --global user.name "git用户名"，git config --global user.email "git邮箱"，提交master；在gibhub.com中新建代码仓库，返回VScode选择推送到命令，远程连接github，然后将代码上传。
