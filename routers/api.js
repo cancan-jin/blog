@@ -169,7 +169,10 @@ router.get("/comment",function(req,res){
     }).then(function(content){
         responseData.data = content.comments;
         res.json(responseData)
-    })
+    }).catch((err)=>{
+        console.log("错误");
+        return
+     })
 })
 
 /*
