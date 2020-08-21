@@ -1,85 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
-    <link rel="stylesheet" type="text/css" href="/public/css/index.css">  
-    <link rel="icon" type="image/x-ico" href="/public/img/logo.ico">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/public/js/index.js"></script>
-</head>
-<body>
-    <div id="content">
-        <div id="banner"></div>
-        <div id="menu">
-            <ul>
-                <li><a href="#">首页</a></li>
-                <li><a href="#">HTML5</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">JAVASCRIPT</a></li>
-                <li><a href="#">PHP</a></li>
-                <li><a href="#">Java</a></li>
-                <li><a href="#">Express</a></li>
-            </ul>
-        </div>
-        <div id="main">
-            <div id="left">
-                <div class="blog_box">
-                    <div class="blog_title">JAVASCRIPT</div>
-                    <div class="blog_info">作者：<span>李明</span>-时间：<span>2020年6月30日 13:28:35</span>-阅读：<span>624</span>-评论：<span>10</span></div>
-                    <div class="blog_main">
-                        Word 等其他文本编辑工具虽然也能实现同样的效果，但是其功能太强大了。Word 还能改变字体颜色，还可以调节字体大小。这么强大的功能可以说是 Word 的优点，但也可以说是它的缺点。
-                    </div>
-                    <button type="button" class="read_more">阅读全文</button>
-                </div>
-                <div class="blog_box">
-                    <div class="blog_title">DOM</div>
-                    <div class="blog_info">作者：<span>李明</span>-时间：<span>2020年6月30日 13:28:35</span>-阅读：<span>624</span>-评论：<span>10</span></div>
-                    <div class="blog_main">
-                        Word 等其他文本编辑工具虽然也能实现同样的效果，但是其功能太强大了。Word 还能改变字体颜色，还可以调节字体大小。这么强大的功能可以说是 Word 的优点，但也可以说是它的缺点。
-                    </div>
-                    <button type="button" class="read_more">阅读全文</button>
-                </div>
-                <div class="page">
-                    <ul>
-                        <li>没有上一页了</li>
-                        <li>1/2</li>
-                        <li>下一页</li>
-                    </ul>
-                </div>
-            </div>
-            <div id="right">
-                <div id="user_information" style="display: none;">
-                    <div class="bgText"><span>用户信息</span></div>
-                    <div id="userMain">
-                        <h5 class="username"></h5>
-                        <span class="information"></span><span class="logout"><a href="javascript:;">退出</a></span>
-                    </div>
-                </div>
-                <div id="login" style="display: none;">
-                    <div class="bgText" ><span>用户登录</span></div>
-                    <div id="loginMain">
-                        <label><span>账号：</span><input class="input" type="text" name="username"  ></label>
-                        <label><span>密码：</span><input class="input" type="password" name="password" ></label>
-                        <button type="button" name="btnLogin">登录</button>
-                        <div class="reg_edit">还没有账号？<a href="javascript:;">立即注册</a></div>
-                        <div id="login_errormessage"></div>
-                    </div>
-                </div>
-                <div id="reg">
-                    <div class="bgText"><span>用户注册</span></div>
-                    <div id="regMain">
-                        <label><span>账号：</span><input class="input" type="text" name="username"  ></label>
-                        <label><span>密码：</span><input class="input" type="password" name="password" ></label>
-                        <label><span>确认：</span><input class="input" type="password" name="repassword" ></label>
-                        <button type="button" name="btnReg">注册</button>
-                        <div class="reg_edit">已经有账号,<a href="javascript:;">立即登录</a></div>
-                        <div id="errormessage"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% extends "layout.html" %}
+{%block content%}
+    {% for content in contents %}
+    <div class="blog_box">
+        <div class="blog_title">{{content.title}}</div>
+        <div class="blog_info">
+            作者：<span>{{content.user.username}}</span>
+            - 时间：<span>{{content.addTime|date("Y-m-d H:i:s",-8*60)}}</span>
+            - 阅读：<span>{{content.views}}</span>
+            - 评论：<span>{{content.comments.length}}</span></div>
+        <div class="blog_main">{{content.description}}</div>
+        <button type="button" class="read_more"><a href="/view?contentid={{content.id}}">阅读全文</a></button>
     </div>
-</body>
-</html>
+    {% endfor %}
+    <div class="page">
+        <ul>
+            <li>
+                {% if page <= 1%}
+                <span>没有上一页了</span>
+                {% else%}
+                <a href="/?category={{category}}&page={{page-1}}">上一页</a></a>
+                {%endif%}
+                        
+            </li>
+            {%if pages > 0%}
+            <li>{{page}} / {{pages}}</li>
+            {%endif%}
+            <li>
+                {% if page >= pages%}
+                <span>没有下一页了</span>
+                {% else%}
+                <a href="/?category={{category}}&page={{page + 1}}">下一页</a></a>
+                {%endif%}
+            </li>
+        </ul>
+    </div>
+{%endblock%}

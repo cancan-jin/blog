@@ -47,14 +47,29 @@ $(function(){
             success: (result)=>{
                 $("#login_errormessage").html(result.message);
                 if(!result.code){
-                    setTimeout(()=>{
+
+                    window.location.reload();
+                    /*setTimeout(()=>{
                         $("#login").hide();
                         $("#user_information").show();
                         //显示登录用户信息
                         $("#userMain").find(".username").html(result.data.username);
                         $("#userMain").find(".information").html("您好，欢迎光临我的博客");
 
-                    },1000)
+                    },1000)*/
+                }
+            }
+        })
+    })
+
+    //退出登录
+    $("#logout").on("click",function(){
+        $.ajax({
+            type: "get",
+            url: "/api/user/logout",
+            success: function(result){
+                if(!result.code){
+                    window.location.reload();
                 }
             }
         })

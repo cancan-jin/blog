@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">  
+    <link rel="icon" type="image/x-ico" href="/public/img/logo.ico">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="banner"></div>
+        <div id="menu">
+            <ul>
+                {% if category == "" %}
+                <li><a href="/" class="foucs">首页</a></li>
+                {%else%}
+                <li><a href="/">首页</a></li>
+                {%endif%}
+                {% for cate in categories%} 
+                {% if category == cate.id %}
+                <li><a href="/?category={{cate.id}}" class="foucs">{{cate.name}}</a></li>
+                {%else%}
+                <li><a href="/?category={{cate.id}}">{{cate.name}}</a></li>
+                {%endif%}
+                
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="main">
+            <div id="left">
+               {%block content%}{%endblock%}
+            </div>
+            <div id="right">
+                {% if userInfo._id %}
+                <div id="user_information">
+                    <div class="bgText"><span>用户信息</span></div>
+                    <div id="userMain">
+                        <h5>{{userInfo.username}}</h5>
+                        <!--使用swig模板引擎传输参数，接受的时候参数包含在{{}}里面.例如：{{KeyName}}-->
+                        {% if userInfo.isAdmin %}
+                        <p>
+                        <span>你好，欢迎光临</span>
+                        <a href="/admin" >进入管理系统</a>
+                        </p>
+                        <p><a href="javascript:;" id="logout">退出</a></p>
+                        {% else %}
+                        <p>你好，欢迎光临我的博客</p><p><a href="javascript:;" id="logout">退出</a></p>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                {% else %}
+                <div id="login">
+                    <div class="bgText" ><span>用户登录</span></div>
+                    <div id="loginMain">
+                        <label><span>账号：</span><input class="input" type="text" name="username"  ></label>
+                        <label><span>密码：</span><input class="input" type="password" name="password" ></label>
+                        <button type="button" name="btnLogin">登录</button>
+                        <div class="reg_edit">还没有账号？<a href="javascript:;">立即注册</a></div>
+                        <div id="login_errormessage"></div>
+                    </div>
+                </div>
+                <div id="reg" style="display: none;">
+                    <div class="bgText"><span>用户注册</span></div>
+                    <div id="regMain">
+                        <label><span>账号：</span><input class="input" type="text" name="username"  ></label>
+                        <label><span>密码：</span><input class="input" type="password" name="password" ></label>
+                        <label><span>确认：</span><input class="input" type="password" name="repassword" ></label>
+                        <button type="button" name="btnReg">注册</button>
+                        <div class="reg_edit">已经有账号,<a href="javascript:;">立即登录</a></div>
+                        <div id="errormessage"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
