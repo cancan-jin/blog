@@ -13,6 +13,16 @@
 
 > github安装时是选择在vs code中运行，VScode终端中输入：git config ++global user.name "git用户名"，git config ++global user.email "git邮箱"，提交master；在gibhub.com中新建代码仓库，返回VScode选择推送到命令，远程连接github，然后将代码上传。在根目录下新建文件.gitignore,复制不准备上传文件的相对路径粘贴在.gitignore文件。
 
++ **github安装**
+  + 下载并安装vs code
+  + 下载并安装github，选择编辑器时选择在vs code中运行
+  + VScode终端中输入：git config ++global user.name "git用户名"，git config ++global user.email "git邮箱"
+  + 新建项目，在源代码管理中初始化储存库
+  + 点击“提交”按钮，并输入master
+  + VScode源代码管理界面中选择“推送到”命令，然后添加远程->从github添加远程->登录
+  + 打开gibhub.com网站，在gibhub.com中新建代码仓库blog
+  + 再次在VScode源代码管理界面中选择“推送到”命令，然后添加远程->从github添加远程->
+
 ### 2、项目需求分析
 
 + **前台功能**
