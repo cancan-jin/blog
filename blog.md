@@ -27,6 +27,11 @@
   + 点击“提交”按钮，输入master
   + 点击“推送”命令，完成代码上传
 
++ **github下载代码**
++ 新建项目文件夹
++ 复制目标文件的https路径
++ 在终端输入git clone https:/github.hub/xxxx/xxx.git
+
 ### 2、项目需求分析
 
 + **前台功能**
